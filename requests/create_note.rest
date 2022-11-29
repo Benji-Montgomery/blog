@@ -2,7 +2,7 @@ POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
-    "name": "bosbs smith",
-    "number": "911-911911"
+    "name": "bosbs smithsss",
+    "number": "911-911911222"
    
 }
