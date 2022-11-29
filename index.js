@@ -5,6 +5,10 @@ const app = express()
 const cors = require('cors')
 require('dotenv').config()
 const Blog = require('./models/blog')
+const logger = require('./utils/logger')
+const config = require('./utils/config')
+const http = require('http')
+const server = http.createServer(app)
 
 const requestLogger = (request, response, next) => {
   console.log('Method:', request.method)
@@ -104,7 +108,6 @@ const errorHandler = (error, request, response, next) => {
 
 app.use(errorHandler)
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+server.listen(config.PORT, () => {
+    logger.info(`Server running on port ${config.PORT}`)
+  })
