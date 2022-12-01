@@ -10,22 +10,17 @@ console.log('twist')
 //   })
 
 const blogSchema = new mongoose.Schema({
+
   name: {
     type: String,
     minlength: 3,
     required: true
   },
-  number: {
-    type: String,
-    minlength: 8,
-    validate: {
-      validator: function(v){
-        const monkey = /^\d{2,3}-\d{1,}$/
-        return monkey.test(v)
-      },
-      message: props => `${props.value} is not a valid finish phone number`
-    },
-    required: [true, 'User phone number required']
+  content: { 
+    type: String
+   },
+  likes: {
+    default: 0
   }
 })
 
@@ -38,3 +33,24 @@ blogSchema.set('toJSON', {
 })
 
 module.exports = mongoose.model('Blog', blogSchema)
+
+// const blogSchema = new mongoose.Schema({
+
+//   name: {
+//     type: String,
+//     minlength: 3,
+//     required: true
+//   },
+//   number: {
+//     type: String,
+//     minlength: 8,
+//     validate: {
+//       validator: function(v){
+//         const monkey = /^\d{2,3}-\d{1,}$/
+//         return monkey.test(v)
+//       },
+//       message: props => `${props.value} is not a valid finish phone number`
+//     },
+//     required: [true, 'User phone number required']
+//   }
+// })
