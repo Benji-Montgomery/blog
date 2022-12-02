@@ -2,8 +2,7 @@ POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
-    "name": "zits111944499",
+    "name": "myNameis SAMEEEREre",
     "title": "my first post",
-    "content": "I love to blog",
-    "likes": 0
+    "content": "I love to blog"
 }
