@@ -2,7 +2,8 @@ POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
-    "name": "zip switch whooner",
-    "number": "911-91192311222"
-   
+    "name": "zits111944499",
+    "title": "my first post",
+    "content": "I love to blog",
+    "likes": 0
 }

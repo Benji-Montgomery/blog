@@ -21,10 +21,18 @@ blogsRouter.get('/:id', (request, response, next) => {
 
 blogsRouter.post('/', (request, response, next) => {
   const body = request.body
-
+  const likesScript = () => {
+    if(body.likes === undefined){
+      body.likes = 0
+    }
+  }
+  console.log(body.likes)
+  likesScript(body)
   const blog = new Blog({
     name: body.name,
-    number: body.number || false,
+    title: body.title,
+    content: body.content || false,
+    likes: body.likes,
     date: new Date(),
   })
 
@@ -48,7 +56,9 @@ blogsRouter.put('/:id', (request, response, next) => {
 
   const blog = {
     name: body.name,
-    number: body.number,
+    title: body.title,
+    content: body.content,
+    likes: body.likes
   }
 
   Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
