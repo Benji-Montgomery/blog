@@ -70,18 +70,46 @@ test('title or name missing', async ()=> {
         .expect(400)
 })
 test('delete a blog', async ()=> {
-    const newBlog = {
-        name: "Sosadfasfdsa",
-        title: "racing",
-        content: "I love honda lollll",
-        likes: 56,
-        id: 10076
-    }
-    console.log('deleteABlog loaded')
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToDelete = blogsAtStart[0]
+    console.log('blogsToDelete', blogToDelete)
     await api
-        .post('/api/blogs')
-        .send(newBlog)
+        .delete(`/api/blogs/${blogToDelete.id}`)
+        .expect(204)
+    
+    const blogsAtEnd = await helper.blogsInDb()
+    console.log('blogsAtEnd.length', blogsAtEnd.length)
+    console.log('blogsAtStart.length', blogsAtStart.length)
+    expect(blogsAtEnd).toHaveLength(
+        blogsAtStart.length -1
+    )
 
+    // const contents= blogsAtEnd.map(r => r.name)
+    // console.log('contents', contents)
+    // expect(contents).not.toContain(blogToDelete.name)
+
+})
+
+test('updating a blog', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+    console.log('blogsAtStart[27]', blogsAtStart[27])
+    const blogToModify = blogsAtStart[27]
+    const updated = {
+        name: 'surani',
+        title: 'i love you',
+        content: 'i love meows',
+        likes: 52
+    }
+    await api
+        .put(`/api/blogs/${blogToModify.id}`)
+        .send(updated)
+    const blogsAtEnd = await helper.blogsInDb()
+    console.log(blogsAtEnd[27])
+
+    expect(blogToModify.likes).toEqual(
+        52
+    )
+    
 })
 
 
