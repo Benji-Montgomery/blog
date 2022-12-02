@@ -50,6 +50,39 @@ test('likes', async () => {
     console.log('the new post', newPost)
     console.log('end')
 })
+test('title or name missing', async ()=> {
+    console.log('tits')
+    const newBlogTitle = {
+        name: 'benjimoto',
+        content: 'i like to wompus'
+    }
+    const newBlogName = {
+        title: 'lolb00m',
+        content: 'I have created a monster'
+    }
+    await api
+        .post('/api/blogs')
+        .send(newBlogTitle)
+        .expect(400)
+    await api
+        .post('/api/blogs')
+        .send(newBlogName)
+        .expect(400)
+})
+test('delete a blog', async ()=> {
+    const newBlog = {
+        name: "Sosadfasfdsa",
+        title: "racing",
+        content: "I love honda lollll",
+        likes: 56,
+        id: 10076
+    }
+    console.log('deleteABlog loaded')
+    await api
+        .post('/api/blogs')
+        .send(newBlog)
+
+})
 
 
 afterAll(() => {

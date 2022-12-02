@@ -21,12 +21,14 @@ blogsRouter.get('/:id', (request, response, next) => {
 
 blogsRouter.post('/', (request, response, next) => {
   const body = request.body
+  if(body.title === undefined || body.name === undefined){
+    response.status(400).end()
+  }
   const likesScript = () => {
     if(body.likes === undefined){
       body.likes = 0
     }
   }
-  console.log(body.likes)
   likesScript(body)
   const blog = new Blog({
     name: body.name,
