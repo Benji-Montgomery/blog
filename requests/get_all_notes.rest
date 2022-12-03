@@ -8,4 +8,18 @@ DELETE http://localhost:3001/api/blogs/id:
 
 PUT http://localhost:3001/api/blogs/id:
 
+###
+
+POST http://localhost:3001/api/users
+
+
+{
+      "username": "mluukaai",
+    "name": "myNameis SAMEEEREre",
+      "password": "asfdlkajdsf",
+
+}
+
+
+
 

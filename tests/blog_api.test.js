@@ -112,6 +112,54 @@ test('updating a blog', async () => {
     
 })
 
+test('creation succeeds with a fresh username', async () => {
+    const usersAtStart = await helper.usersInDb()
+
+    const newUser = {
+      //username: 'roberto',
+      //name: 'milkaneetan',
+      password: 'salainen',
+    }
+    jest.setTimeout(100000)
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    const usersAtEnd = await helper.usersInDb()
+    expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
+
+    const usernames = usersAtEnd.map(u => u.username)
+    expect(usernames).toContain(newUser.username)
+  })
+
+  test('short username does not succeed', async () => {
+   // const usersAtStart = await helper.usersInDb()
+
+    const newUser = {
+      username: 'ro2223223short',
+      name: 'milkaneetan',
+      password: 'sa',
+    }
+    jest.setTimeout(100000)
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
+    
+    const usersAtEnd = await helper.usersInDb()
+    //   .expect(201)
+    //   .expect('Content-Type', /application\/json/)
+    console.log(usersAtEnd)
+    // const usersAtEnd = await helper.usersInDb()
+    // expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
+
+    // const usernames = usersAtEnd.map(u => u.username)
+    // expect(usernames).toContain(newUser.username)
+  })
+
 
 afterAll(() => {
     mongoose.connection.close()
