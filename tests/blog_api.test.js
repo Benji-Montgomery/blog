@@ -3,7 +3,8 @@ const supertest = require('supertest')
 const app = require('../app')
 const Blog = require('../models/blog')
 const helper = require('./blog_helper')
-
+const User = require('../models/user')
+const bcrypt = require('bcrypt')
 const api = supertest(app)
 
 test('unique identifier id is defined', async () => {
@@ -138,9 +139,9 @@ test('creation succeeds with a fresh username', async () => {
    // const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-      username: 'ro2223223short',
-      name: 'milkaneetan',
-      password: 'sa',
+      username: 'Sosadfasfdsa',
+      name: 'Sosadfasfdsa',
+      password: 'samsonite',
     }
     jest.setTimeout(100000)
     await api

@@ -10,15 +10,19 @@ PUT http://localhost:3001/api/blogs/id:
 
 ###
 
-POST http://localhost:3001/api/users
+GET http://localhost:3001/api/users
 
+###
+
+POST http://localhost:3001/api/users
+Content-Type: application/json
 
 {
-      "username": "mluukaai",
-    "name": "myNameis SAMEEEREre",
-      "password": "asfdlkajdsf",
-
+      "username": "surani",
+      "name": "surani",
+      "password": "surani"
 }
+
 
 
 
