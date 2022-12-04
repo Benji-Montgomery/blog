@@ -2,7 +2,8 @@ GET http://localhost:3001/api/blogs
 
 ###
 
-DELETE http://localhost:3001/api/blogs/id:
+DELETE http://localhost:3001/api/blogs/638b97a6dc92478f889dcfdd
+
 
 ###
 
@@ -18,9 +19,9 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-      "username": "surani",
-      "name": "surani",
-      "password": "surani"
+      "username": "samson667",
+      "name": "samson667",
+      "password": "samson667"
 }
 
 

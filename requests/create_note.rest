@@ -1,13 +1,18 @@
 POST http://localhost:3001/api/blogs 
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1cmFuaTU1NSIsImlkIjoiNjM4YmM3M2Y2YWJhMDE4ZTY0NTY3YzkyIiwiaWF0IjoxNjcwMTA3MzkyfQ.cYOWjuRyCbiiNq0axaAeqnk0VUw7thOOjGhbwGNzm3k
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbXNvbjY2NyIsImlkIjoiNjM4YzgxYWY0OGM3MGY1ZWYwYTNhODg0IiwiaWF0IjoxNjcwMTUyNjQ1fQ.-mtbtPk7LDvz3SF1hRMtgs5UP1KCYCNObIR7JUTQ0JU
 
 {   
-    "name": "milk",
-    "title": "my fith post",
-    "content": "I love to blog inside mice kittens",
-    "likes" : 4332323
+    "name": "samson667",
+    "title": "my 13th winning post",
+    "content": "I love tires and mouthwash and bees",
+    "likes" : 4332323232325
 }
+
+###
+
+DELETE http://localhost:3001/api/blogs/638c85c8045fc688b8d2d257
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbXNvbjY2NyIsImlkIjoiNjM4YzgxYWY0OGM3MGY1ZWYwYTNhODg0IiwiaWF0IjoxNjcwMTUyNjQ1fQ.-mtbtPk7LDvz3SF1hRMtgs5UP1KCYCNObIR7JUTQ0JU
 
 ###
 POST http://localhost:3001/api/users
@@ -19,6 +24,11 @@ POST http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-    "username": "surani555",
-    "password": "surani555"
+    "username": "samson667",
+    "password": "samson667"
 }
+
+###
+
+GET http://localhost:3001/api/blogs
+

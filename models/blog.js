@@ -10,7 +10,9 @@ console.log('twist')
 //   })
 
 const blogSchema = new mongoose.Schema({
-
+  username: {
+    type: String
+  },
   name: {
     type: String,
     minlength: 3,

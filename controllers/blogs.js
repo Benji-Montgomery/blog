@@ -51,8 +51,10 @@ blogsRouter.post('/', async (request, response) => {
     }
   }
   likesScript(body)
+  console.log(user)
   const blog = new Blog({
     user: user._id,
+    username: user.username,
     name: body.name,
     title: body.title,
     content: body.content || false,
@@ -67,14 +69,32 @@ blogsRouter.post('/', async (request, response) => {
   response.status(201).json(savedBlog)
 
 })
-
-blogsRouter.delete('/:id', (request, response, next) => {
-  Blog.findByIdAndRemove(request.params.id)
-    .then(() => {
-      response.status(204).end()
-    })
-    .catch(error => next(error))
+blogsRouter.delete('/:id', async (request, response) => {
+  const token = (request.token)
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  if (!token || !decodedToken.id) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
+  let blog = await Blog.findById(request.params.id)
+  console.log(blog)
+  console.log(decodedToken)
+  if(blog.username !== decodedToken.username){
+    return response.status(401).json({ error: 'wrong username'})
+}
+  //if ( Blog.user.toString() === id.toString() ){
+  //  console.log('poop')
+  //}
+  await Blog.findByIdAndRemove(request.params.id)
+  response.status(204).end()
 })
+// blogsRouter.delete('/:id', (request, response, next) => {
+//   console.log('kittenees')
+//   Blog.findByIdAndRemove(request.params.id)
+//     .then(() => {
+//       response.status(204).end()
+//     })
+//     .catch(error => next(error))
+// })
 
 blogsRouter.put('/:id', (request, response, next) => {
   const body = request.body

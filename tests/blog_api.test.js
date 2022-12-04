@@ -13,7 +13,7 @@ test('unique identifier id is defined', async () => {
     expect(response.body[0].id).toBeDefined()
 })
 
-test('a valid blog can be added', async () => {
+test('failure with 401 while adding', async () => {
     const initialResponse = await api .get('/api/blogs')
     let initialTestBlogs = initialResponse.body.length
     console.log(initialTestBlogs)
@@ -24,15 +24,49 @@ test('a valid blog can be added', async () => {
     await api
         .post('/api/blogs')
         .send(newBlog)
-        .expect(201)
-        .expect('Content-Type', /application\/json/)
-    const response = await api.get('/api/blogs')
-    const contents = response.body.map(r => r.name)
-    expect(response.body).toHaveLength(initialTestBlogs +1)
-    expect(contents).toContain(
-        'sankiomatic'
-    )
+        .expect(401)
+    //     .expect('Content-Type', /application\/json/)
+    // const response = await api.get('/api/blogs')
+    // const contents = response.body.map(r => r.name)
+    // expect(response.body).toHaveLength(initialTestBlogs +1)
+    // expect(contents).toContain(
+    //     'sankiomatic'
+    // )
 })
+test('add a blog', async () => {
+    const initialResponse = await api.get('/api/blogs')
+    let initialTestBlogs = initialResponse.body.length
+    console.log('initialBLOGS', initialTestBlogs)
+    const loginUser = {
+        username: "samson667",
+        password: "samson667"
+    }
+    //await api
+    //    .post('/api/login')
+    //    .send(loginUser)
+    //    .set(, 'application/json')
+//     POST http://localhost:3001/api/blogs 
+// Content-Type: application/json
+// Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbXNvbjY2NyIsImlkIjoiNjM4YzgxYWY0OGM3MGY1ZWYwYTNhODg0IiwiaWF0IjoxNjcwMTUyNjQ1fQ.-mtbtPk7LDvz3SF1hRMtgs5UP1KCYCNObIR7JUTQ0JU
+    const newPost =
+        {   
+            "name": "samson667",
+            "title": "my 13th winning post",
+            "content": "I love tires and mouthwash and bees",
+            "likes" : 4332323232325
+        }
+    let hashNew ="bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbXNvbjY2NyIsImlkIjoiNjM4YzgxYWY0OGM3MGY1ZWYwYTNhODg0IiwiaWF0IjoxNjcwMTUyNjQ1fQ.-mtbtPk7LDvz3SF1hRMtgs5UP1KCYCNObIR7JUTQ0JU"
+    await api
+        .post('/api/blogs')
+        .set('Authorization', hashNew)
+        .send(newPost)
+        .expect('Content-Type', /application\/json/)
+         const response = await api.get('/api/blogs')
+         expect(response.body).toHaveLength(initialTestBlogs +1)
+
+
+})
+
 test('likes', async () => {
     console.log('zoom')
     const newBlog = {
